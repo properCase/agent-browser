@@ -809,6 +809,7 @@ export interface ScreenshotCommand extends BaseCommand {
   format?: 'png' | 'jpeg';
   quality?: number;
   annotate?: boolean;
+  scale?: 'css' | 'device' | number;
 }
 
 export interface SnapshotCommand extends BaseCommand {
