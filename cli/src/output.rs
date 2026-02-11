@@ -995,10 +995,15 @@ Options:
                              Each label [N] corresponds to ref @eN from snapshot.
                              Prints a legend mapping labels to element roles/names.
                              With --json, annotations are included in the response.
+  --format <png|jpeg|webp>   Image format (default: png, or inferred from path)
+  --quality <0-100>          Compression quality (jpeg and webp only)
   --scale <css|device|N>     Screenshot scale factor (default: css)
                              css: 1x logical pixels
                              device: native device pixel ratio
                              N: custom scale (e.g., 0.5, 1.5, 2)
+
+Format is auto-detected from file extension when not specified.
+Set defaults via AGENT_BROWSER_SCREENSHOT_FORMAT and AGENT_BROWSER_SCREENSHOT_QUALITY.
 
 Global Options:
   --json               Output as JSON
@@ -1007,6 +1012,8 @@ Global Options:
 Examples:
   agent-browser screenshot
   agent-browser screenshot ./screenshot.png
+  agent-browser screenshot ./shot.webp
+  agent-browser screenshot --format webp --quality 80
   agent-browser screenshot --full ./full-page.png
   agent-browser screenshot --annotate              # Labeled screenshot + legend
   agent-browser screenshot --annotate ./page.png   # Save annotated screenshot
@@ -1888,7 +1895,7 @@ Core Commands:
   scroll <dir> [px]          Scroll (up/down/left/right)
   scrollintoview <sel>       Scroll element into view
   wait <sel|ms>              Wait for element or time
-  screenshot [path]          Take screenshot (--scale css|device|N)
+  screenshot [path]          Take screenshot (--format png|jpeg|webp, --quality, --scale)
   pdf <path>                 Save as PDF
   snapshot                   Accessibility tree with refs (for AI)
   eval <js>                  Run JavaScript
@@ -2021,6 +2028,8 @@ Environment:
   AGENT_BROWSER_STREAM_PORT      Enable WebSocket streaming on port (e.g., 9223)
   AGENT_BROWSER_IOS_DEVICE       Default iOS device name
   AGENT_BROWSER_IOS_UDID         Default iOS device UDID
+  AGENT_BROWSER_SCREENSHOT_FORMAT     Default screenshot format (png, jpeg, webp)
+  AGENT_BROWSER_SCREENSHOT_QUALITY    Default screenshot quality (0-100, jpeg/webp)
 
 Install (recommended, fastest - native Rust CLI):
   npm install -g agent-browser

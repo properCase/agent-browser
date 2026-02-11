@@ -197,6 +197,8 @@ pub struct Flags {
     pub allow_file_access: bool,
     pub kiosk: bool,
     pub device: Option<String>,
+    pub screenshot_format: Option<String>,
+    pub screenshot_quality: Option<u32>,
     pub auto_connect: bool,
     pub session_name: Option<String>,
     pub annotate: bool,
@@ -275,6 +277,8 @@ pub fn parse_flags(args: &[String]) -> Flags {
         kiosk: false,
         device: env::var("AGENT_BROWSER_IOS_DEVICE").ok()
             .or(config.device),
+        screenshot_format: env::var("AGENT_BROWSER_SCREENSHOT_FORMAT").ok(),
+        screenshot_quality: env::var("AGENT_BROWSER_SCREENSHOT_QUALITY").ok().and_then(|s| s.parse().ok()),
         auto_connect: env_var_is_truthy("AGENT_BROWSER_AUTO_CONNECT")
             || config.auto_connect.unwrap_or(false),
         session_name: env::var("AGENT_BROWSER_SESSION_NAME").ok()
