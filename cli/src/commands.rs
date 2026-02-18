@@ -404,6 +404,11 @@ pub fn parse_command(args: &[String], flags: &Flags) -> Result<Value, ParseError
                         }
                         i += 2;
                         continue;
+                    } else {
+                        return Err(ParseError::MissingArguments {
+                            context: "--scale requires a value".to_string(),
+                            usage: "screenshot [selector] [path] [--scale css|device|<number>]",
+                        });
                     }
                 } else if rest[i] == "--format" {
                     if let Some(val) = rest.get(i + 1) {
@@ -420,6 +425,11 @@ pub fn parse_command(args: &[String], flags: &Flags) -> Result<Value, ParseError
                         }
                         i += 2;
                         continue;
+                    } else {
+                        return Err(ParseError::MissingArguments {
+                            context: "--format requires a value".to_string(),
+                            usage: "screenshot [selector] [path] [--format png|jpeg|webp]",
+                        });
                     }
                 } else if rest[i] == "--quality" {
                     if let Some(val) = rest.get(i + 1) {
@@ -436,6 +446,11 @@ pub fn parse_command(args: &[String], flags: &Flags) -> Result<Value, ParseError
                         }
                         i += 2;
                         continue;
+                    } else {
+                        return Err(ParseError::MissingArguments {
+                            context: "--quality requires a value".to_string(),
+                            usage: "screenshot [selector] [path] [--quality 0-100]",
+                        });
                     }
                 }
                 filtered_rest.push(rest[i]);

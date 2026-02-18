@@ -833,6 +833,10 @@ async function handleScreenshot(
           await browser.clearDeviceMetricsOverride();
         }
       }
+    } else if (needsCDP && command.selector) {
+      throw new Error(
+        'WebP format is not supported for element screenshots. Use --format png or --format jpeg instead.'
+      );
     } else if (isNumericScale && command.selector) {
       // Selector + numeric scale: CDP can't clip to elements, fall back to Playwright.
       // The numeric scale won't apply since Playwright ignores CDP device metrics.
